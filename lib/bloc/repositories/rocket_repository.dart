@@ -5,11 +5,12 @@ class RocketRepository {
   Future<List<Rocket>> getRocketRepository() async {
     try {
       final dio = Dio();
-      dio.options.headers["spacex-key"] = "spacex-key";
-      final client = await RestClient(dio);
+      final client = RestClient(dio);
       return client.getRockets();
     } catch (e) {
-      throw Exception(e);
+      print(Exception(e));
+      return Future.error(Exception(e));
+      // throw Exception(e);
     }
   }
 }
