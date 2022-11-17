@@ -1,8 +1,8 @@
-import 'package:dami_rocket_app/bloc/dami_app_cubit.dart';
 import 'package:dami_rocket_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import './bloc/repositories/rocket_repository.dart';
 
 import './widgets/my_colors.dart';
 
@@ -94,7 +94,11 @@ class DamiApp extends StatelessWidget {
               secondary: Color.fromRGBO(128, 206, 27, 1),
           )
       ),
-      home: BlocProvider(create: (_) => DamiAppCubit(), child: HomeScreen()),
+      home: RepositoryProvider(
+        create: (context) => RocketRepository(),
+        child: HomeScreen(),
+      )
+      // home: HomeScreen(),
     );
   }
 }

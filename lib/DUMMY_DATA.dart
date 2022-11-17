@@ -1,4 +1,6 @@
-List <Map<String, dynamic>> dummy_flights = [
+import 'dart:core';
+
+List<Map<String, dynamic>> dummy_flights = [
   {
     'DUMMY_NAME': 'FalconSat',
     'DUMMY_FLIGHT_NO': '1',
@@ -25,3 +27,4 @@ List <Map<String, dynamic>> dummy_flights = [
     'DUMMY_FLIGHT_DATE': DateTime.now()
   },
 ];
+

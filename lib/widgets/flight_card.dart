@@ -8,7 +8,7 @@ import 'package:intl/date_symbol_data_local.dart';
 
 class FlightCard extends StatelessWidget {
   String flightName;
-  String flightNo;
+  int flightNo;
   DateTime flightDate;
 
   FlightCard(
@@ -28,14 +28,14 @@ class FlightCard extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         elevation: 3,
         child: ListTile(
+          visualDensity: VisualDensity(vertical: 0.5),
           onTap: () {
             dio.options.headers["spacex-key"] = "spacex-key";
             final client = RestClient(dio);
             client.getRockets().then((func) {
-              for(int x = 0; x < func.length; x++){
+              for (int x = 0; x < func.length; x++) {
                 print(func[x].name);
               }
-
 
 /*              for(int x = 0; x < func.length; x++){
                 print(func[x].toString());
@@ -48,13 +48,14 @@ class FlightCard extends StatelessWidget {
           },
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           leading: Column(
-            children: const <Widget>[
-              Spacer(),
-              Icon(
-                Icons.accessible_forward_rounded,
-                size: 50,
-              ),
-              Spacer()
+            children: <Widget>[
+              Container(
+                  height: 57,
+                  width: 57,
+                  child: Image.asset(
+                    'lib/assets/pics/rocket_icon_list_item.png',
+                    fit: BoxFit.cover,
+                  )),
             ],
           ),
           title: Text(
@@ -74,14 +75,13 @@ class FlightCard extends StatelessWidget {
                         fontFamily: 'Roboto',
                         fontWeight: FontWeight.w700)),
                 TextSpan(
-                    text: flightNo,
-                  style: const TextStyle(
-                    fontSize: 11,
-                    height: 16 / 11,
-                    color: Color.fromRGBO(155, 165, 174, 1),
-                    fontFamily: 'Roboto',
-                  )
-                )
+                    text: flightNo.toString(),
+                    style: const TextStyle(
+                      fontSize: 11,
+                      height: 16 / 11,
+                      color: Color.fromRGBO(155, 165, 174, 1),
+                      fontFamily: 'Roboto',
+                    ))
               ])),
               Text.rich(TextSpan(children: [
                 const TextSpan(
@@ -99,8 +99,7 @@ class FlightCard extends StatelessWidget {
                       height: 16 / 11,
                       color: Color.fromRGBO(155, 165, 174, 1),
                       fontFamily: 'Roboto',
-                    )
-                )
+                    ))
               ]))
 
 /*              Text(
@@ -111,7 +110,14 @@ class FlightCard extends StatelessWidget {
             ],
           ),
           trailing: Column(
-            children: [Spacer(), Icon(Icons.arrow_forward_ios, size: 15,), Spacer()],
+            children: [
+              Spacer(),
+              Icon(
+                Icons.arrow_forward_ios,
+                size: 15,
+              ),
+              Spacer()
+            ],
           ),
           isThreeLine: true,
         ),
