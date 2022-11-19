@@ -4,10 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-//test importy
-import 'package:logger/logger.dart';
-import 'package:dio/dio.dart';
-
 // widgety
 import '../widgets/flight_card.dart';
 import '../widgets/home_screen_failed.dart';
@@ -22,6 +18,8 @@ import '../bloc/bloc_objects/app_bloc_model.dart';
 import '../DUMMY_DATA.dart';
 
 class HomeScreen extends StatefulWidget {
+  static const String routeName = '/';
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -32,6 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
   }
+
 
 
   @override

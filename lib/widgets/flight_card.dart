@@ -5,6 +5,7 @@ import 'package:dami_rocket_app/spaceX_api/rocket_api.dart';
 import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import '../screens/flight_detail_screen.dart';
 
 class FlightCard extends StatelessWidget {
   String flightName;
@@ -36,6 +37,7 @@ class FlightCard extends StatelessWidget {
               for (int x = 0; x < func.length; x++) {
                 print(func[x].name);
               }
+              Navigator.of(context).pushNamed(FlightDetailScreen.routeName);
 
 /*              for(int x = 0; x < func.length; x++){
                 print(func[x].toString());

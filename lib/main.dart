@@ -1,20 +1,24 @@
+import 'package:dami_rocket_app/routes/app_router.gr.dart';
+import 'package:dami_rocket_app/screens/flight_detail_screen.dart';
 import 'package:dami_rocket_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import './bloc/repositories/rocket_repository.dart';
+import './routes/app_router.dart';
 
 import './widgets/my_colors.dart';
 
 void main() {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  runApp(const DamiApp());
+  runApp(DamiApp());
   FlutterNativeSplash.remove();
 }
 
 class DamiApp extends StatelessWidget {
-  const DamiApp({Key? key}) : super(key: key);
+  DamiApp({Key? key}) : super(key: key);
+  final _appRouter = AppRouter();
 
   // This widget is the root of your application.
   @override
@@ -82,7 +86,8 @@ class DamiApp extends StatelessWidget {
                     fontFamily: 'Roboto',
                     fontSize: 14,
                     height: 20 / 14,
-                    letterSpacing: 0.25),
+                    letterSpacing: 0.25,
+                ),
                 bodySmall: TextStyle(
                     fontFamily: 'Roboto',
                     fontSize: 12,
@@ -113,7 +118,11 @@ class DamiApp extends StatelessWidget {
         home: RepositoryProvider(
           create: (context) => RocketRepository(),
           child: HomeScreen(),
-        )
+        ),
+        routes: {
+          /*HomeScreen.routeName: (context) => HomeScreen(),*/
+          FlightDetailScreen.routeName: (context) => FlightDetailScreen()
+        },
         // home: HomeScreen(),
         );
   }
