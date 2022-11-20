@@ -32,14 +32,13 @@ class FlightCard extends StatelessWidget {
         child: ListTile(
           visualDensity: VisualDensity(vertical: 0.5),
           onTap: () {
-
-
-            dio.options.headers["spacex-key"] = "spacex-key";
+            Navigator.of(context).pushNamed(FlightDetailScreen.routeName);
+/*            dio.options.headers["spacex-key"] = "spacex-key";
             final client = RestClient(dio);
             client.getRocketCardData('5e9d0d95eda69955f709d1eb').then((func) {
               print(func.toString());
               Navigator.of(context).pushNamed(FlightDetailScreen.routeName);
-            });
+            });*/
 
           },
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
