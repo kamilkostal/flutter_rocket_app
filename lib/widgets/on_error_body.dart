@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:bloc/bloc.dart';
+import '../bloc/bloc_events/home_screen_events.dart';
 import '../bloc/bloc_objects/app_bloc_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/bloc_events/app_events.dart';

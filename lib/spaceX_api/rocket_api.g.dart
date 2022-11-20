@@ -24,23 +24,19 @@ RocketCardData _$RocketCardDataFromJson(Map<String, dynamic> json) =>
       type: json['type'] as String,
       boosters: json['boosters'] as int,
       name: json['name'] as String,
-      flight_number: json['flight_number'] as int,
-      rocket: json['rocket'] as String,
       company: json['company'] as String,
-      description: json['description'] as String?,
-      wikipedia: json['wikipedia'] as String?,
-      stages: json['stages'] as int?,
+      description: json['description'] as String,
+      wikipedia: json['wikipedia'] as String,
+      stages: json['stages'] as int,
     );
 
 Map<String, dynamic> _$RocketCardDataToJson(RocketCardData instance) =>
     <String, dynamic>{
       'id': instance.id,
       'description': instance.description,
-      'rocket': instance.rocket,
       'name': instance.name,
       'stages': instance.stages,
       'wikipedia': instance.wikipedia,
-      'flight_number': instance.flight_number,
       'boosters': instance.boosters,
       'company': instance.company,
       'type': instance.type,

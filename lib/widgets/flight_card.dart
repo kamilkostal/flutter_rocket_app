@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import '../screens/flight_detail_screen.dart';
+import '../bloc/repositories/rocket_detail_repository.dart';
 
 class FlightCard extends StatelessWidget {
   String flightName;
@@ -31,22 +32,15 @@ class FlightCard extends StatelessWidget {
         child: ListTile(
           visualDensity: VisualDensity(vertical: 0.5),
           onTap: () {
+
+
             dio.options.headers["spacex-key"] = "spacex-key";
             final client = RestClient(dio);
-            client.getRockets().then((func) {
-              for (int x = 0; x < func.length; x++) {
-                print(func[x].name);
-              }
+            client.getRocketCardData('5e9d0d95eda69955f709d1eb').then((func) {
+              print(func.toString());
               Navigator.of(context).pushNamed(FlightDetailScreen.routeName);
-
-/*              for(int x = 0; x < func.length; x++){
-                print(func[x].toString());
-              }*/
             });
-/*            print(DateFormat('cs_CS').format(flightDate));
-            print(DateFormat('cs_CS').format(flightDate).toString());
-            print(DateTime.now());
-            print(DateFormat('dd. MM. yyyy H:m').format(flightDate));*/
+
           },
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           leading: Column(

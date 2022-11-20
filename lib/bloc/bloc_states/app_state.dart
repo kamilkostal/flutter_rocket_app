@@ -10,16 +10,9 @@ class UserLoadingState extends UserState{
   List<Object?> get props => [];
 }
 
-class UserLoadedState extends UserState{
-  final List<Rocket> rocketCardData;
-  UserLoadedState(this.rocketCardData);
-
-  @override
-  List<Object?> get props => [rocketCardData];
-}
-
 class UserErrorState extends UserState{
   @override
   List<Object?> get props => [];
 }
+
 

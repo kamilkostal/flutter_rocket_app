@@ -6,7 +6,3 @@ abstract class AppEvents extends Equatable{
   const AppEvents();
 }
 
-class LoadUserEvent extends AppEvents{
-  @override
-  List<Object> get props => [];
-}

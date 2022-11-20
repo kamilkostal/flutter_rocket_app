@@ -6,12 +6,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 // widgety
 import '../widgets/flight_card.dart';
-import '../widgets/home_screen_failed.dart';
+import '../widgets/on_error_body.dart';
 
 // pomocne tridy
 import 'package:bloc/bloc.dart';
 import '../bloc/bloc_events/app_events.dart';
+import '../bloc/bloc_events/home_screen_events.dart';
 import '../bloc/bloc_states/app_state.dart';
+import '../bloc/bloc_states/home_screen_states.dart';
 import '../bloc/bloc_objects/app_bloc_model.dart';
 
 //importy ktere pak smazat
@@ -37,8 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          AppBloc(RepositoryProvider.of<RocketRepository>(context))
-            ..add(LoadUserEvent()),
+          AppBloc(RepositoryProvider.of<RocketRepository>(context))..add(LoadUserEvent()),
       child: Scaffold(
           appBar: AppBar(
             backgroundColor: Theme.of(context).appBarTheme.backgroundColor,

@@ -34,12 +34,10 @@ class Rocket {
 @JsonSerializable()
 class RocketCardData {
   String id;
-  String? description;
-  String rocket;
+  String description;
   String name;
-  int? stages;
-  String? wikipedia;
-  int flight_number;
+  int stages;
+  String wikipedia;
   int boosters;
   String company;
   String type;
@@ -49,12 +47,10 @@ class RocketCardData {
       required this.type,
       required this.boosters,
       required this.name,
-      required this.flight_number,
-      required this.rocket,
       required this.company,
-      this.description,
-      this.wikipedia,
-      this.stages});
+      required this.description,
+      required this.wikipedia,
+      required this.stages});
 
   factory RocketCardData.fromJson(Map<String, dynamic> json) =>
       _$RocketCardDataFromJson(json);
