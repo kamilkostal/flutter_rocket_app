@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 // widgety
 import '../widgets/flight_card.dart';
-import '../widgets/on_error_body.dart';
+import '../widgets/on_error_body_home.dart';
 
 // pomocne tridy
 import 'package:bloc/bloc.dart';
@@ -82,17 +82,22 @@ class _HomeScreenState extends State<HomeScreen> {
                             FlightCard(
                                 flightName: rocketCardData[i].name!,
                                 flightNo: rocketCardData[i].flight_number,
-                                flightDate: DateTime.now())
+                                flightDate: DateTime.parse(rocketCardData[i].date_utc),
+                                rocketId: rocketCardData[i].rocket,
+                            )
                           ],
                         )));
               }
               if (state is UserErrorState) {
-                return HomeScreenFailed();
+                return OnErrorBodyHome();
               } else {
-                return HomeScreenFailed();
+                return OnErrorBodyHome();
               }
             },
           )),
     );
   }
+/*  void loadContent(){
+    BlocProvider.of<AppBloc>(context).add(LoadUserEvent());
+  }*/
 }

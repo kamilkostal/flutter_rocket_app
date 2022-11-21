@@ -20,11 +20,14 @@ class Rocket {
   String name;
   String date_utc;
   int flight_number;
+  String rocket;
 
   Rocket(
       {required this.name,
       required this.date_utc,
-      required this.flight_number});
+      required this.flight_number,
+      required this.rocket,
+      });
 
   factory Rocket.fromJson(Map<String, dynamic> json) => _$RocketFromJson(json);
 

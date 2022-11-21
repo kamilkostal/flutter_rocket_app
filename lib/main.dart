@@ -9,6 +9,7 @@ import './bloc/repositories/rocket_repository.dart';
 import './bloc/repositories/rocket_detail_repository.dart';
 import './routes/app_router.dart';
 
+
 import './widgets/my_colors.dart';
 
 void main() {
@@ -126,7 +127,8 @@ class DamiApp extends StatelessWidget {
         ),
         routes: {
           /*HomeScreen.routeName: (context) => HomeScreen(),*/
-          FlightDetailScreen.routeName: (context) => FlightDetailScreen(),
+           FlightDetailScreen.routeName: (context) => FlightDetailScreen(),
+          // FlightDetailScreen.routeName: (context) => FlightDetailWithFuture(),
           // FlightDetailScreen.routeName: (context) => FlightDetailMock()
         },
         // home: HomeScreen(),

@@ -12,11 +12,13 @@ class FlightCard extends StatelessWidget {
   String flightName;
   int flightNo;
   DateTime flightDate;
+  String rocketId;
 
   FlightCard(
       {required this.flightName,
       required this.flightNo,
-      required this.flightDate});
+      required this.flightDate,
+      required this.rocketId});
 
   @override
   Widget build(BuildContext context) {
@@ -32,13 +34,10 @@ class FlightCard extends StatelessWidget {
         child: ListTile(
           visualDensity: VisualDensity(vertical: 0.5),
           onTap: () {
-            Navigator.of(context).pushNamed(FlightDetailScreen.routeName);
-/*            dio.options.headers["spacex-key"] = "spacex-key";
-            final client = RestClient(dio);
-            client.getRocketCardData('5e9d0d95eda69955f709d1eb').then((func) {
-              print(func.toString());
-              Navigator.of(context).pushNamed(FlightDetailScreen.routeName);
-            });*/
+            Navigator.of(context).pushNamed(FlightDetailScreen.routeName, arguments: ArgumentObject(rocketId: rocketId, rocketName: flightName));
+            print('2006-03-24T22:30:00.000Z');
+            print(DateTime.parse('2006-03-24T22:30:00.000Z'));
+            print(DateFormat('dd. MM. yyyy H:m').format(DateTime.parse('2006-03-24T22:30:00.000Z')));
 
           },
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -119,4 +118,10 @@ class FlightCard extends StatelessWidget {
       ),
     );
   }
+}
+
+class ArgumentObject{
+  String rocketName;
+  String rocketId;
+  ArgumentObject({required this.rocketId, required this.rocketName});
 }

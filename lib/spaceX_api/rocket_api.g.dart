@@ -10,12 +10,14 @@ Rocket _$RocketFromJson(Map<String, dynamic> json) => Rocket(
       name: json['name'] as String,
       date_utc: json['date_utc'] as String,
       flight_number: json['flight_number'] as int,
+      rocket: json['rocket'] as String,
     );
 
 Map<String, dynamic> _$RocketToJson(Rocket instance) => <String, dynamic>{
       'name': instance.name,
       'date_utc': instance.date_utc,
       'flight_number': instance.flight_number,
+      'rocket': instance.rocket,
     };
 
 RocketCardData _$RocketCardDataFromJson(Map<String, dynamic> json) =>

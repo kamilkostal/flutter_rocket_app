@@ -32,16 +32,19 @@ class AppBloc extends Bloc<AppEvents, UserState> {
 
 class FlightDetailBloc extends Bloc<AppEvents, UserState> {
   final RocketDetailRepository _rocketCard;
-  String id;
 
-  FlightDetailBloc(this._rocketCard, this.id) : super(UserLoadingState()){
-    on<LoadUserEvent>((event, emit) async {
+  FlightDetailBloc(this._rocketCard) : super(UserLoadingState()){
+    on<LoadCardDataEvent>((event, emit) async {
       emit(UserLoadingState());
       try{
-        final rocketDetail = await _rocketCard.getRocketDetailRepository(id);
+        print('hned po user loading state');
+        final rocketDetail = await _rocketCard.getRocketDetailRepository(event.id);
         emit(CardDetailLoadedState(rocketDetail));
+        print('rocket details načteny');
       }
       catch (e) {
+        print('tady se stala chyba');
+        print(event.id);
         emit(UserErrorState());
       }
     });

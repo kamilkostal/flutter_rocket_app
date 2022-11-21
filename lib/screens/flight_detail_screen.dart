@@ -6,13 +6,16 @@ import 'package:dami_rocket_app/bloc/bloc_states/app_state.dart';
 import 'package:dami_rocket_app/bloc/bloc_states/flight_detail_states.dart';
 import 'package:dami_rocket_app/bloc/bloc_states/home_screen_states.dart';
 import 'package:dami_rocket_app/spaceX_api/rocket_api.dart';
+import 'package:dami_rocket_app/widgets/flight_card.dart';
 import '../bloc/repositories/rocket_detail_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/repositories/rocket_detail_repository.dart';
-import '../widgets/on_error_body.dart';
+import '../widgets/on_error_body_home.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:dami_rocket_app/DUMMY_DATA.dart';
+import '../widgets/on_error_body_detail.dart';
 
 class FlightDetailScreen extends StatefulWidget {
   static const String routeName = '/flight-detail';
@@ -31,19 +34,24 @@ class _FlightDetailScreenState extends State<FlightDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    String id = '5e9d0d95eda69955f709d1eb';
+    final arguments =
+        ModalRoute.of(context)!.settings.arguments as ArgumentObject;
+    // final String id = arguments.rocketId;
+    // String id = '5e9d0d95eda69955f709d1eb';
+    // String id = dummyId;
     return BlocProvider(
-      create: (context) =>
-          FlightDetailBloc(RocketDetailRepository(), id)..add(LoadUserEvent()),
+      create: (context) => FlightDetailBloc(RocketDetailRepository())
+        ..add(LoadCardDataEvent(arguments.rocketId)),
       child: Scaffold(
           appBar: AppBar(
             toolbarHeight: 96,
             title: Text(
-              'neco',
+              arguments.rocketName,
               style: Theme.of(context)
                   .textTheme
                   .titleLarge!
                   .merge(TextStyle(color: Colors.white)),
+              overflow: TextOverflow.fade,
             ),
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
@@ -56,7 +64,7 @@ class _FlightDetailScreenState extends State<FlightDetailScreen> {
                 );
               }
               if (state is UserErrorState) {
-                return HomeScreenFailed();
+                return OnErrorBodyDetail(arguments.rocketId);
               }
               if (state is CardDetailLoadedState) {
                 RocketCardData rocketData = state.rocketCardDetail;
@@ -84,12 +92,14 @@ class _FlightDetailScreenState extends State<FlightDetailScreen> {
                       child: Row(
                         children: <Widget>[
                           Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               RichText(
                                 //textAlign: TextAlign.left,
                                 text: TextSpan(
                                     text: 'Rocket: ',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontFamily: 'Roboto',
                                       fontSize: 11,
                                       height: 16 / 11,
@@ -99,7 +109,7 @@ class _FlightDetailScreenState extends State<FlightDetailScreen> {
                                     children: [
                                       TextSpan(
                                         text: rocketData.type,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontFamily: 'Roboto',
                                           fontSize: 11,
                                           height: 16 / 11,
@@ -137,55 +147,59 @@ class _FlightDetailScreenState extends State<FlightDetailScreen> {
                             ],
                           ),
                           Spacer(),
-                          Column(children: <Widget>[
-                            RichText(
-                              text: TextSpan(
-                                  text: 'Company: ',
-                                  style: const TextStyle(
-                                    fontFamily: 'Roboto',
-                                    fontSize: 11,
-                                    height: 16 / 11,
-                                    fontWeight: FontWeight.w900,
-                                    color: Color.fromRGBO(155, 165, 174, 1),
-                                  ),
-                                  children: [
-                                    TextSpan(
-                                        text: rocketData.company,
-                                        style: const TextStyle(
-                                          fontFamily: 'Roboto',
-                                          fontSize: 11,
-                                          height: 16 / 11,
-                                          fontWeight: FontWeight.w700,
-                                          color:
-                                              Color.fromRGBO(155, 165, 174, 1),
-                                        ))
-                                  ]),
-                            ),
-                            RichText(
-                              textAlign: TextAlign.start,
-                              text: TextSpan(
-                                  text: 'Boosters: ',
-                                  style: const TextStyle(
-                                    fontFamily: 'Roboto',
-                                    fontSize: 11,
-                                    height: 16 / 11,
-                                    fontWeight: FontWeight.w900,
-                                    color: Color.fromRGBO(155, 165, 174, 1),
-                                  ),
-                                  children: [
-                                    TextSpan(
-                                        text: rocketData.boosters.toString(),
-                                        style: const TextStyle(
-                                          fontFamily: 'Roboto',
-                                          fontSize: 11,
-                                          height: 16 / 11,
-                                          fontWeight: FontWeight.w700,
-                                          color:
-                                              Color.fromRGBO(155, 165, 174, 1),
-                                        ))
-                                  ]),
-                            ),
-                          ]),
+                          Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                RichText(
+                                  text: TextSpan(
+                                      text: 'Company: ',
+                                      style: const TextStyle(
+                                        fontFamily: 'Roboto',
+                                        fontSize: 11,
+                                        height: 16 / 11,
+                                        fontWeight: FontWeight.w900,
+                                        color: Color.fromRGBO(155, 165, 174, 1),
+                                      ),
+                                      children: [
+                                        TextSpan(
+                                            text: rocketData.company,
+                                            style: const TextStyle(
+                                              fontFamily: 'Roboto',
+                                              fontSize: 11,
+                                              height: 16 / 11,
+                                              fontWeight: FontWeight.w700,
+                                              color: Color.fromRGBO(
+                                                  155, 165, 174, 1),
+                                            ))
+                                      ]),
+                                ),
+                                RichText(
+                                  textAlign: TextAlign.start,
+                                  text: TextSpan(
+                                      text: 'Boosters: ',
+                                      style: const TextStyle(
+                                        fontFamily: 'Roboto',
+                                        fontSize: 11,
+                                        height: 16 / 11,
+                                        fontWeight: FontWeight.w900,
+                                        color: Color.fromRGBO(155, 165, 174, 1),
+                                      ),
+                                      children: [
+                                        TextSpan(
+                                            text:
+                                                rocketData.boosters.toString(),
+                                            style: const TextStyle(
+                                              fontFamily: 'Roboto',
+                                              fontSize: 11,
+                                              height: 16 / 11,
+                                              fontWeight: FontWeight.w700,
+                                              color: Color.fromRGBO(
+                                                  155, 165, 174, 1),
+                                            ))
+                                      ]),
+                                ),
+                              ]),
                           const SizedBox(
                             width: 94,
                           )
@@ -194,18 +208,24 @@ class _FlightDetailScreenState extends State<FlightDetailScreen> {
                     ),
                     TextButton(
                         onPressed: () {
-                          launchUrl(Uri.parse(rocketData.wikipedia));
+
                         },
                         child: Text('WIKIPEDIA')),
                     Spacer()
                   ],
                 );
               } else {
-                return HomeScreenFailed();
+                return Center(
+                  child: Text('smula no'),
+                );
               }
             },
           )),
     );
   }
+
+/*  void loadContent(){
+    BlocProvider.of<FlightDetailBloc>(context).add(LoadCardDataEvent());
+  }*/
 
 }

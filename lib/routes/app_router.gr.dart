@@ -32,7 +32,7 @@ class AppRouter extends _i3.RootStackRouter {
     FlightDetailRoute.name: (routeData) {
       return _i3.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i2.FlightDetailScreen(),
+        child: const _i2.FlightDetailScreen(),
       );
     },
   };
