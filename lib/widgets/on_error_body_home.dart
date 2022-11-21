@@ -1,10 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import '../bloc/bloc_events/home_screen_events.dart';
 import '../bloc/bloc_objects/app_bloc_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../bloc/bloc_events/app_events.dart';
-import '../screens/home_screen.dart';
 
 class OnErrorBodyHome extends StatefulWidget {
 
@@ -36,8 +34,8 @@ class _OnErrorBodyHomeState extends State<OnErrorBodyHome> {
               onPressed: () {
                 BlocProvider.of<AppBloc>(context).add(LoadUserEvent());
               },
-              child: Text('TRY AGAIN'),),
-          Spacer(),
+              child: const Text('TRY AGAIN'),),
+          const Spacer(),
         ],
       ),
     );

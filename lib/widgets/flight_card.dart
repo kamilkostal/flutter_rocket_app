@@ -1,18 +1,15 @@
-import 'package:flutter/cupertino.dart';
+// externi packages
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
-import 'package:dami_rocket_app/spaceX_api/rocket_api.dart';
-import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
-import 'package:intl/date_symbol_data_local.dart';
+
+// pomocne tridy
 import '../screens/flight_detail_screen.dart';
-import '../bloc/repositories/rocket_detail_repository.dart';
 
 class FlightCard extends StatelessWidget {
-  String flightName;
-  int flightNo;
-  DateTime flightDate;
-  String rocketId;
+  final String flightName;
+  final int flightNo;
+  final DateTime flightDate;
+  final String rocketId;
 
   FlightCard(
       {required this.flightName,
@@ -22,8 +19,6 @@ class FlightCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final logger = Logger();
-    final dio = Dio();
     String formatedDate = DateFormat('dd. MM. yyyy H:m').format(flightDate);
     // TODO: implement build
     return Padding(
@@ -32,12 +27,9 @@ class FlightCard extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         elevation: 3,
         child: ListTile(
-          visualDensity: VisualDensity(vertical: 0.5),
+          visualDensity: const VisualDensity(vertical: 0.5),
           onTap: () {
             Navigator.of(context).pushNamed(FlightDetailScreen.routeName, arguments: ArgumentObject(rocketId: rocketId, rocketName: flightName));
-            print('2006-03-24T22:30:00.000Z');
-            print(DateTime.parse('2006-03-24T22:30:00.000Z'));
-            print(DateFormat('dd. MM. yyyy H:m').format(DateTime.parse('2006-03-24T22:30:00.000Z')));
 
           },
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -104,7 +96,7 @@ class FlightCard extends StatelessWidget {
             ],
           ),
           trailing: Column(
-            children: [
+            children: const [
               Spacer(),
               Icon(
                 Icons.arrow_forward_ios,

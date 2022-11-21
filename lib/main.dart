@@ -1,5 +1,4 @@
 import 'package:dami_rocket_app/routes/app_router.gr.dart';
-import 'package:dami_rocket_app/screens/flight_detail_mock.dart';
 import 'package:dami_rocket_app/screens/flight_detail_screen.dart';
 import 'package:dami_rocket_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -7,10 +6,6 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import './bloc/repositories/rocket_repository.dart';
 import './bloc/repositories/rocket_detail_repository.dart';
-import './routes/app_router.dart';
-
-
-import './widgets/my_colors.dart';
 
 void main() {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -121,15 +116,13 @@ class DamiApp extends StatelessWidget {
         home: MultiRepositoryProvider(
           providers: [
             RepositoryProvider(create: (context) => RocketRepository()),
-            RepositoryProvider(create: (context) => RocketDetailRepository())
+            // RepositoryProvider(create: (context) => RocketDetailRepository())
           ],
           child: HomeScreen(),
         ),
         routes: {
           /*HomeScreen.routeName: (context) => HomeScreen(),*/
            FlightDetailScreen.routeName: (context) => FlightDetailScreen(),
-          // FlightDetailScreen.routeName: (context) => FlightDetailWithFuture(),
-          // FlightDetailScreen.routeName: (context) => FlightDetailMock()
         },
         // home: HomeScreen(),
         );

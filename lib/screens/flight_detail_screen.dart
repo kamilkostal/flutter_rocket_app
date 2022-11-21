@@ -1,21 +1,19 @@
-import 'package:dami_rocket_app/bloc/bloc_events/app_events.dart';
+// externi packages
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+// widgety
+import '../widgets/on_error_body_detail.dart';
+
+// pomocne tridy
 import 'package:dami_rocket_app/bloc/bloc_events/flight_detail_events.dart';
-import 'package:dami_rocket_app/bloc/bloc_events/home_screen_events.dart';
 import 'package:dami_rocket_app/bloc/bloc_objects/app_bloc_model.dart';
 import 'package:dami_rocket_app/bloc/bloc_states/app_state.dart';
 import 'package:dami_rocket_app/bloc/bloc_states/flight_detail_states.dart';
-import 'package:dami_rocket_app/bloc/bloc_states/home_screen_states.dart';
 import 'package:dami_rocket_app/spaceX_api/rocket_api.dart';
 import 'package:dami_rocket_app/widgets/flight_card.dart';
 import '../bloc/repositories/rocket_detail_repository.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../bloc/repositories/rocket_detail_repository.dart';
-import '../widgets/on_error_body_home.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:dami_rocket_app/DUMMY_DATA.dart';
-import '../widgets/on_error_body_detail.dart';
 
 class FlightDetailScreen extends StatefulWidget {
   static const String routeName = '/flight-detail';
@@ -32,13 +30,24 @@ class _FlightDetailScreenState extends State<FlightDetailScreen> {
     super.initState();
   }
 
+  Future<dynamic> _launchUrl(String url) async {
+    try {
+      Uri urlUri = Uri.parse(url);
+      bool validUrl = await canLaunchUrl(urlUri);
+      await launchUrl(urlUri);
+    } catch (e) {
+      // toto nefunguje :((
+      return SnackBar(
+          content: Text('Oops! Something went wrong'),
+          backgroundColor: Colors.grey,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final arguments =
         ModalRoute.of(context)!.settings.arguments as ArgumentObject;
-    // final String id = arguments.rocketId;
-    // String id = '5e9d0d95eda69955f709d1eb';
-    // String id = dummyId;
     return BlocProvider(
       create: (context) => FlightDetailBloc(RocketDetailRepository())
         ..add(LoadCardDataEvent(arguments.rocketId)),
@@ -50,7 +59,7 @@ class _FlightDetailScreenState extends State<FlightDetailScreen> {
               style: Theme.of(context)
                   .textTheme
                   .titleLarge!
-                  .merge(TextStyle(color: Colors.white)),
+                  .merge(const TextStyle(color: Colors.white)),
               overflow: TextOverflow.fade,
             ),
             shape:
@@ -59,7 +68,7 @@ class _FlightDetailScreenState extends State<FlightDetailScreen> {
           body: BlocBuilder<FlightDetailBloc, UserState>(
             builder: (context, state) {
               if (state is UserLoadingState) {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               }
@@ -71,13 +80,11 @@ class _FlightDetailScreenState extends State<FlightDetailScreen> {
                 return Column(
                   children: <Widget>[
                     Padding(
-                      padding: EdgeInsets.all(24.0),
+                      padding: const EdgeInsets.all(24.0),
                       child: Text(
                         rocketData.description,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyMedium!
-                            .merge(TextStyle(fontWeight: FontWeight.w400)),
+                        style: Theme.of(context).textTheme.bodyMedium!.merge(
+                            const TextStyle(fontWeight: FontWeight.w400)),
 /*                      style: TextStyle(
                           color: Colors.black,
                           fontFamily: 'Roboto',
@@ -146,7 +153,7 @@ class _FlightDetailScreenState extends State<FlightDetailScreen> {
                               ),
                             ],
                           ),
-                          Spacer(),
+                          const Spacer(),
                           Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -208,14 +215,14 @@ class _FlightDetailScreenState extends State<FlightDetailScreen> {
                     ),
                     TextButton(
                         onPressed: () {
-
+                          _launchUrl(rocketData.wikipedia);
                         },
-                        child: Text('WIKIPEDIA')),
-                    Spacer()
+                        child: const Text('WIKIPEDIA')),
+                    const Spacer()
                   ],
                 );
               } else {
-                return Center(
+                return const Center(
                   child: Text('smula no'),
                 );
               }

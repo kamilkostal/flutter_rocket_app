@@ -1,22 +1,12 @@
 import 'package:dami_rocket_app/bloc/bloc_events/flight_detail_events.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../bloc/bloc_events/home_screen_events.dart';
 import '../bloc/bloc_objects/app_bloc_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../bloc/bloc_events/app_events.dart';
-import '../screens/home_screen.dart';
 
-class OnErrorBodyDetail extends StatefulWidget {
+class OnErrorBodyDetail extends StatelessWidget {
   String id;
 
-  OnErrorBodyDetail(this.id);
-  @override
-  State<OnErrorBodyDetail> createState() => _OnErrorBodyDetailState();
-}
-
-
-class _OnErrorBodyDetailState extends State<OnErrorBodyDetail> {
+  OnErrorBodyDetail(this.id, {super.key});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,10 +27,10 @@ class _OnErrorBodyDetailState extends State<OnErrorBodyDetail> {
           ),
           TextButton(
               onPressed: () {
-                BlocProvider.of<FlightDetailBloc>(context).add(LoadCardDataEvent(widget.id));
+                BlocProvider.of<FlightDetailBloc>(context).add(LoadCardDataEvent(id));
               },
-              child: Text('TRY AGAIN'),),
-          Spacer(),
+              child: const Text('TRY AGAIN'),),
+          const Spacer(),
         ],
       ),
     );

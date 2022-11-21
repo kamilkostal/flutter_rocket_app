@@ -8,7 +8,7 @@ class RocketRepository {
       final client = RestClient(dio);
       return client.getRockets();
     } catch (e) {
-      print(Exception(e));
+      // print(Exception(e));
       return Future.error(Exception(e));
       // throw Exception(e);
     }

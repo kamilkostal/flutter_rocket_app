@@ -20,7 +20,7 @@ class AppBloc extends Bloc<AppEvents, UserState> {
       emit(UserLoadingState());
       try{
         final rocketCardDataList = await _rocketList.getRocketRepository();
-        print(rocketCardDataList.runtimeType);
+        // print(rocketCardDataList.runtimeType);
         emit(UserLoadedState(rocketCardDataList));
       }
       catch (e) {
@@ -37,14 +37,14 @@ class FlightDetailBloc extends Bloc<AppEvents, UserState> {
     on<LoadCardDataEvent>((event, emit) async {
       emit(UserLoadingState());
       try{
-        print('hned po user loading state');
+        // print('hned po user loading state');
         final rocketDetail = await _rocketCard.getRocketDetailRepository(event.id);
         emit(CardDetailLoadedState(rocketDetail));
-        print('rocket details načteny');
+        // print('rocket details načteny');
       }
       catch (e) {
-        print('tady se stala chyba');
-        print(event.id);
+        // print('tady se stala chyba');
+        // print(event.id);
         emit(UserErrorState());
       }
     });

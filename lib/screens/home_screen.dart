@@ -1,6 +1,4 @@
-import 'package:dami_rocket_app/bloc/repositories/rocket_repository.dart';
-import 'package:dami_rocket_app/spaceX_api/rocket_api.dart';
-import 'package:flutter/cupertino.dart';
+// externi packages
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,18 +7,18 @@ import '../widgets/flight_card.dart';
 import '../widgets/on_error_body_home.dart';
 
 // pomocne tridy
-import 'package:bloc/bloc.dart';
-import '../bloc/bloc_events/app_events.dart';
+import 'package:dami_rocket_app/bloc/repositories/rocket_repository.dart';
+import 'package:dami_rocket_app/spaceX_api/rocket_api.dart';
 import '../bloc/bloc_events/home_screen_events.dart';
 import '../bloc/bloc_states/app_state.dart';
 import '../bloc/bloc_states/home_screen_states.dart';
 import '../bloc/bloc_objects/app_bloc_model.dart';
 
-//importy ktere pak smazat
-import '../DUMMY_DATA.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/';
+
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -61,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(height: 8),
                 Text('SPACE X FLIGHT',
                     style: Theme.of(context).textTheme.labelMedium!.merge(
-                        TextStyle(color: Color.fromRGBO(155, 165, 174, 1))))
+                        const TextStyle(color: Color.fromRGBO(155, 165, 174, 1))))
               ],
             ),
             centerTitle: true,
@@ -69,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
           body: BlocBuilder<AppBloc, UserState>(
             builder: (context, state) {
               if (state is UserLoadingState) {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               }
@@ -80,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemBuilder: (context, i) => (Column(
                           children: <Widget>[
                             FlightCard(
-                                flightName: rocketCardData[i].name!,
+                                flightName: rocketCardData[i].name,
                                 flightNo: rocketCardData[i].flight_number,
                                 flightDate: DateTime.parse(rocketCardData[i].date_utc),
                                 rocketId: rocketCardData[i].rocket,
