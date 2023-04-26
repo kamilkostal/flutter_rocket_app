@@ -2,6 +2,7 @@
 
 Flutter projekt pro Dami Dev
 
-## Snad to nějak dopadne:]
+((obcas po naklonovani repozitare blbnou assety, ale casem se to rozchodi))
 
-((nepovedlo se mi zprovoznit AutoRoute v kombinaci s Blocem, takže jsem navigaci řešil přes obyčejnej Navigator))
+## Snad to nějak dopadne:]
+((nepovedlo se mi zprovoznit AutoRoute v kombinaci s Blocem, takže jsem navigaci řešil přes obyčejnej Navigator.of))
